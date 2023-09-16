@@ -1,9 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://be2jx7xfmhe3h"]
+[gd_scene load_steps=3 format=3 uid="uid://be2jx7xfmhe3h"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_28ta0"]
 size = Vector2(300, 300)
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_e1l36"]
+
 [node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.369437, -0.619713, -0.692439, 0.80841, -0.153125, 0.568353, -0.458246, -0.769745, 0.444413, 0.415363, 2.88919, 0)
+shadow_enabled = true
 
 [node name="Ground" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_28ta0")
+
+[node name="Player" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.910167, 0)
+mesh = SubResource("CapsuleMesh_e1l36")
