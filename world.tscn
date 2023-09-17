@@ -2,20 +2,26 @@
 
 [ext_resource type="Texture2D" uid="uid://506c4vyt0h6i" path="res://textures/earth_color_10K.png" id="1_bamih"]
 [ext_resource type="Shader" path="res://world.gdshader" id="1_k8x6l"]
+[ext_resource type="Texture2D" uid="uid://4mpee8uox26n" path="res://textures/earth_normal.png" id="2_3hhhh"]
 [ext_resource type="Texture2D" uid="uid://4mb4a7vv6jvk" path="res://textures/gebco_08_rev_elev_21600x10800.png" id="3_3fhlr"]
-[ext_resource type="Texture2D" uid="uid://c61m8rtu46tnl" path="res://textures/earthbumpspec_8K_Earth_Normal_Map_1__Praesepe.jpg" id="4_qsdkg"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_uub5o"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_boh3a"]
 render_priority = 0
 shader = ExtResource("1_k8x6l")
-shader_parameter/normalEnabled = false
-shader_parameter/height_ratio = 9.47
+shader_parameter/normalEnabled = true
+shader_parameter/height_ratio = 10.0
 shader_parameter/albedo = ExtResource("1_bamih")
-shader_parameter/normal = ExtResource("4_qsdkg")
+shader_parameter/NormalMap = ExtResource("2_3hhhh")
 shader_parameter/heightmap = ExtResource("3_3fhlr")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3vfwv"]
+disable_ambient_light = true
 albedo_texture = ExtResource("1_bamih")
+normal_enabled = true
+normal_scale = 0.55
+normal_texture = ExtResource("2_3hhhh")
+subsurf_scatter_enabled = true
+backlight = Color(0.2, 0, 0.807843, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_ngma7"]
 lightmap_size_hint = Vector2i(9426, 4714)
@@ -30,14 +36,14 @@ rings = 640
 [node name="World" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.857233, 0.352957, -0.374931, -0.389168, -0.920883, 0.0228744, -0.337194, 0.16552, 0.926771, 40.1098, 525.523, 0)
+transform = Transform3D(-0.509829, -0.837273, -0.197606, 0.851508, -0.523851, 0.0226873, -0.122512, -0.156697, 0.980019, 40.1098, 525.523, 0)
 shadow_enabled = true
 
 [node name="Ground" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.698, 22.3134, -42.0082)
-material_override = SubResource("ShaderMaterial_uub5o")
+material_override = SubResource("ShaderMaterial_boh3a")
 mesh = SubResource("SphereMesh_ngma7")
 
-[node name="Player" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 300.733, 0)
+[node name="Player" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 301, 0)
 mesh = SubResource("CapsuleMesh_e1l36")
+skeleton = NodePath("../..")

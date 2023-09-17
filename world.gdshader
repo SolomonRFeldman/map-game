@@ -1,14 +1,12 @@
 shader_type spatial;
 
 uniform sampler2D albedo;
-uniform sampler2D normal;
+uniform sampler2D NormalMap;
 uniform bool normalEnabled;
 
 void fragment() {
 	ALBEDO = texture(albedo, UV).rgb;
-	if(normalEnabled) {
-		NORMAL_MAP = texture(normal, UV).rgb;
-	}
+	NORMAL_MAP = texture(NormalMap, UV).rgb;
 }
 
 uniform sampler2D heightmap;
