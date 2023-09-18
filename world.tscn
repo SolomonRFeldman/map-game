@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://be2jx7xfmhe3h"]
+[gd_scene load_steps=11 format=3 uid="uid://be2jx7xfmhe3h"]
 
 [ext_resource type="Texture2D" uid="uid://506c4vyt0h6i" path="res://textures/earth_color_10K.png" id="1_bamih"]
 [ext_resource type="Shader" path="res://world.gdshader" id="1_k8x6l"]
 [ext_resource type="Texture2D" uid="uid://4mpee8uox26n" path="res://textures/earth_normal.png" id="2_3hhhh"]
 [ext_resource type="Texture2D" uid="uid://4mb4a7vv6jvk" path="res://textures/gebco_08_rev_elev_21600x10800.png" id="3_3fhlr"]
+[ext_resource type="Script" path="res://Ground.gd" id="5_fo2gc"]
+[ext_resource type="Script" path="res://Camera3D.gd" id="6_wtlip"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_boh3a"]
 render_priority = 0
@@ -36,12 +38,19 @@ rings = 640
 [node name="World" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.509829, -0.837273, -0.197606, 0.851508, -0.523851, 0.0226873, -0.122512, -0.156697, 0.980019, 40.1098, 525.523, 0)
+transform = Transform3D(0.0599984, 0.104139, -0.992751, 0.851722, -0.523983, -0.00349064, -0.520548, -0.845339, -0.120136, 40.1098, 525.523, 0)
 shadow_enabled = true
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -400)
+fov = 90.0
+script = ExtResource("6_wtlip")
+
 [node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_boh3a")
 mesh = SubResource("SphereMesh_ngma7")
+script = ExtResource("5_fo2gc")
 
 [node name="Player" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 301, 0)
