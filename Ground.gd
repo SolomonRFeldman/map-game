@@ -25,4 +25,3 @@ func _process(delta):
 	transform.basis = Basis() # reset rotation
 	rotate_object_local(Vector3(0, 1, 0), lon_rads) # first rotate in Y
 	rotate_object_local(Vector3(cos(lon_rads), 0, sin(lon_rads)), lat_rads)
-	print(lon)
