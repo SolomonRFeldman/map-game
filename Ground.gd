@@ -5,12 +5,9 @@ extends MeshInstance3D
 func _ready():
 	pass # Replace with function body.
 
-
+# New York :)
 var lat = 40.71427
 var lon = -74.00597
-
-var spin_limit = 280
-var turn_limit = 565
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
